@@ -16,15 +16,14 @@ class PlagarismDetector(object):
         """
         self.N = N
 
-    def get_similiarity_percentage(self, file1_words, file2_words):
+    def get_similiarity_percentage_str(self, file1_words, file2_words):
         """
         Returns the similiarity score (see get_similiarity_score) as a
         percentage string.
 
         @param file1_words word list from file1 with synonms replaced
         @param file2_words word list from file2 with synonms replaced
-        @returns the similiarity score (see get_similiarity_score) as
-        a percentage string.
+        @returns the similiarity score percentage as a string.
         """
         similiarity_score = self.get_similiarity_score(file1_words,
                                                        file2_words)
@@ -44,6 +43,7 @@ class PlagarismDetector(object):
         file1_tuples_container = NTupleContainer(file1_words, self.N)
         file2_tuples_contianer = NTupleContainer(file2_words, self.N)
         similar_tuple_count = 0.0
+        total_tuple_count = float(len(file1_tuples_container))
 
         # This for loop takes O(n) time. The __contains__ method
         # defined in the NTupleContainer class words in O(1) so the
@@ -52,7 +52,8 @@ class PlagarismDetector(object):
             if n_tuple in file2_tuples_contianer:
                 similar_tuple_count += 1
 
-        return similar_tuple_count/float(len(file1_tuples_container))
+        similarity_score = similar_tuple_count/total_tuple_count
+        return similarity_score
 
 
 class NTupleContainer(object):
@@ -92,26 +93,29 @@ class NTupleContainer(object):
 
     def __contains__(self, item):
         """
-        returns True if the container contains the given tuple in O(1)
+        Allows the use of the "in" keyword with this container.
+        @return True if the container contains the given tuple in O(1)
         otherwise returns False
         """
         return item in self.tuple_dict
 
     def __len__(self):
         """
-        returns the number of tuples held in the container.
+        Allows the len() function to work on this container.
+        @return the number of tuples held in the container.
         """
         return len(self.tuple_dict)
 
     def __iter__(self):
         """
         Allows the container to be iterable in python.
+        @returns an interator over the tuples in the container
         """
         return iter(self.tuple_dict.keys())
 
     def __str__(self):
         """
-        returns the elements contained in the container as a string.
+        @return the elements contained in the container as a string.
         """
         return str(self.tuple_dict.keys())
 

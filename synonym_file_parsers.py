@@ -17,6 +17,7 @@ class AbstractSynonymParser(ABC):
         In a subclass method should instantiate the parser and use the
         parse method (see below) to read the file and generate the
         synonyms_dict class variable
+        This method may throw an IOError.
         """
         pass
 
@@ -25,6 +26,7 @@ class AbstractSynonymParser(ABC):
         """
         In a subclass this method should read the file given as the
         argument file_name and generates a dict of synonyms.
+        This method may throw an IOError.
         """
         pass
 
@@ -48,6 +50,9 @@ class SpaceSeparatedSynonymFileParser(AbstractSynonymParser):
     """
 
     def __init__(self, synonym_file):
+        """
+        initializes a space seperated synonym_file parser
+        """
         self.synonym_dict = {}
         self.parse(synonym_file)
 
@@ -55,6 +60,7 @@ class SpaceSeparatedSynonymFileParser(AbstractSynonymParser):
         """
         Reads the file given as the argument file_name and generates a
         dict of synonyms.
+        This method may throw a IOError Exception.
         @return None
         """
         with open(file_name) as file_handler:
