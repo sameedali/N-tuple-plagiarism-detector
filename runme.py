@@ -2,6 +2,7 @@
 This file shows an example of how to use the library
 """
 
+import sys
 from plagarism_detector import PlagarismDetector
 from plagarism_detector import NValueTooLarge
 from plagarism_detector import NValueTooSmall
@@ -14,6 +15,31 @@ def main():
     filename_2 = "file2.txt"
     synonyms_filename = "syns.txt"
     N = 3
+
+    if len(sys.argv) == 1:
+        print("To run with custom arguments: python3 runme.py file1.txt "
+              + "file2.txt N syn_file.txt")
+    elif len(sys.argv) == 3:
+        filename_1 = sys.argv[1]
+        filename_2 = sys.argv[2]
+    elif len(sys.argv) == 5:
+        try:
+            N = int(sys.argv[3])
+            filename_1 = sys.argv[1]
+            filename_2 = sys.argv[2]
+            synonyms_filename = sys.argv[4]
+        except ValueError as value_error:
+            print("Could not convert supplied value of N to integer. Aborting.")
+            print(str(value_error))
+            sys.exit(0)
+    else:
+        print("incorrent number of arguments. Arguments should be like"
+              + "python3 runme.py file1.txt file2.txt N syn_file.txt" +
+              "or python3 runme.py file1.txt file2.txt")
+
+    print("Running program with file1=" + filename_1 + " and file2="
+          + filename_2 + ", N=" + str(N)
+          + " and synonyms file=" + str(synonyms_filename))
 
     try:
         synonym_file_parser = SpaceSeparatedSynonymFileParser(synonyms_filename)
@@ -31,8 +57,9 @@ def main():
             file2_words = word_list_generator.generate_list(file2_string)
 
         plagarism_detector = PlagarismDetector(N)
-        print(plagarism_detector.get_similiarity_percentage(file1_words,
-                                                            file2_words))
+        print("plagarism percentage is:", end="")
+        print(plagarism_detector.get_similiarity_percentage_str(file1_words,
+                                                                file2_words))
     except IOError as ioerror:
         print("Error opeining file. Aborting program.")
         print(str(ioerror))
