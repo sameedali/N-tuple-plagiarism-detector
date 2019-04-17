@@ -3,7 +3,7 @@ This module defines a plagarism detector in Python.
 """
 
 
-class PlagarismDetector(object):
+class PlagiarismDetector(object):
     """
     A class which defines the plagarism detector
     """

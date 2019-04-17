@@ -1,5 +1,9 @@
 """
 This module defines the parsers for the synonym file.
+
+An abstract class is defined for the parser. This will allow us to
+write parsers for other synonym input formats easily if needed in the
+future.
 """
 
 from abc import ABC, abstractmethod

@@ -3,9 +3,9 @@ This file shows an example of how to use the library
 """
 
 import sys
-from plagarism_detector import PlagarismDetector
-from plagarism_detector import NValueTooLarge
-from plagarism_detector import NValueTooSmall
+from plagiarism_detector import PlagiarismDetector
+from plagiarism_detector import NValueTooLarge
+from plagiarism_detector import NValueTooSmall
 from word_list_generator import WordListGenerator
 from synonym_file_parsers import SpaceSeparatedSynonymFileParser
 
@@ -19,6 +19,7 @@ def main():
     if len(sys.argv) == 1:
         print("To run with custom arguments: python3 runme.py file1.txt "
               + "file2.txt N syn_file.txt")
+        sys.exit(0)
     elif len(sys.argv) == 3:
         filename_1 = sys.argv[1]
         filename_2 = sys.argv[2]
@@ -56,9 +57,9 @@ def main():
             file2_string = file2_handle.read()
             file2_words = word_list_generator.generate_list(file2_string)
 
-        plagarism_detector = PlagarismDetector(N)
-        print("plagarism percentage is:", end="")
-        print(plagarism_detector.get_similiarity_percentage_str(file1_words,
+        plagiarism_detector = PlagiarismDetector(N)
+        print("plagiarism percentage is:", end="")
+        print(plagiarism_detector.get_similiarity_percentage_str(file1_words,
                                                                 file2_words))
     except IOError as ioerror:
         print("Error opeining file. Aborting program.")
