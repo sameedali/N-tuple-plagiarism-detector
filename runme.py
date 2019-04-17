@@ -1,4 +1,6 @@
-from ntuple import *
+from plagarism_detector import PlagarismDetector
+from word_list_generator import WordListGenerator
+from synonym_file_parsers import SpaceSeparatedSynonymFileParser
 
 def main():
     """
@@ -8,7 +10,7 @@ def main():
     synonyms_filename = "syns.txt"
     N = 3
 
-    synonym_file_parser = SynonymFileParser(synonyms_filename)
+    synonym_file_parser = SpaceSeparatedSynonymFileParser(synonyms_filename)
     synonyms_dict = synonym_file_parser.get_synonyms()
     word_list_generator = WordListGenerator(synonyms_dict)
 
