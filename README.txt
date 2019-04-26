@@ -1,5 +1,3 @@
-SAMEED ALI
-
 Assumptions
 ===========
 1. A word is defined as containing uppercase and lowercase letter
@@ -69,10 +67,6 @@ score.
 
 Design Decisions and optimizations
 ==================================
-> While getting the right answer is important, we are also interested
-  in how well thought out your solution is; are there easier, or faster ways?
-> Is the code understandable to another engineer picking it up?
-
 I chose to store the synonym list in a hash table data structure so we
 can do O(1) time lookup when we are given a word to see if it has a
 synonym or not.
@@ -107,11 +101,6 @@ class to generate the word lists for multiple files.
 
 I have also handled exceptions in the code and made custom exceptions
 and used them where appropriate.
-
-> If there are obvious ways it could be abstracted or extended, is it
-  designed to support that? 
-> For example, this N-tuple detection algorithm may end up being used
-  in other contexts (like a website) and so should be easy to reuse.
 
 I designed the code to be as modular as possible. This allows the code
 to be easily extended in the future.
