@@ -11,14 +11,15 @@ from synonym_file_parsers import SpaceSeparatedSynonymFileParser
 
 
 def main():
+    # default values
     filename_1 = "file1.txt"
     filename_2 = "file2.txt"
     synonyms_filename = "syns.txt"
     N = 3
 
+    # parse the arguments
     if len(sys.argv) == 1:
-        print("To run with custom arguments: python3 runme.py file1.txt "
-              + "file2.txt N syn_file.txt")
+        print("Usage: python3 runme.py file1.txt file2.txt N syn_file.txt")
         sys.exit(0)
     elif len(sys.argv) == 3:
         filename_1 = sys.argv[1]
@@ -26,29 +27,24 @@ def main():
     elif len(sys.argv) == 5:
         try:
             N = int(sys.argv[3])
-            filename_1 = sys.argv[1]
-            filename_2 = sys.argv[2]
-            synonyms_filename = sys.argv[4]
         except ValueError as value_error:
-            print("Could not convert supplied value of N to integer. Aborting.")
             print(str(value_error))
-            sys.exit(0)
+            print("Error reading N, setting N as 3")
+            N = 3
+        filename_1 = sys.argv[1]
+        filename_2 = sys.argv[2]
+        synonyms_filename = sys.argv[4]
     else:
-        print("incorrent number of arguments. Arguments should be like"
-              + "python3 runme.py file1.txt file2.txt N syn_file.txt" +
-              "or python3 runme.py file1.txt file2.txt")
+        print("Incorrent number of arguments. Arguments should be like"
+              + "python3 runme.py file1.txt file2.txt N syn_file.txt"
+              + "or python3 runme.py file1.txt file2.txt")
 
-    print("Running program with file1=" + filename_1 + " and file2="
-          + filename_2 + ", N=" + str(N)
-          + " and synonyms file=" + str(synonyms_filename))
-
+    # run program with parsed arguments
     try:
         synonym_file_parser = SpaceSeparatedSynonymFileParser(synonyms_filename)
         synonyms_dict = synonym_file_parser.get_synonyms()
 
         word_list_generator = WordListGenerator(synonyms_dict)
-
-
         with open(filename_1) as file1_handle:
             file1_string = file1_handle.read()
             file1_words = word_list_generator.generate_list(file1_string)
@@ -58,9 +54,8 @@ def main():
             file2_words = word_list_generator.generate_list(file2_string)
 
         plagiarism_detector = PlagiarismDetector(N)
-        print("plagiarism percentage is:", end="")
-        print(plagiarism_detector.get_similiarity_percentage_str(file1_words,
-                                                                file2_words))
+        percentage = plagiarism_detector.get_similiarity_percentage_str(file1_words, file2_words)
+        print(percentage)
     except IOError as ioerror:
         print("Error opeining file. Aborting program.")
         print(str(ioerror))

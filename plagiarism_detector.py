@@ -27,7 +27,7 @@ class PlagiarismDetector(object):
         """
         similiarity_score = self.get_similiarity_score(file1_words,
                                                        file2_words)
-        return str(round(100.0 * similiarity_score, 3)) + "%"
+        return str(int(round(100.0 * similiarity_score, 3))) + "%"
 
     def get_similiarity_score(self, file1_words, file2_words):
         """

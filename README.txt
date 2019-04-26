@@ -8,6 +8,8 @@ WordListGenerator constructor.
 
 2. Code is written in python3.
 
+3. A N-tuple is counted once even if it occurs multiple times in file2.
+
 Design Summary
 ==============
 A simple summary of what the code does is as follows:
@@ -39,7 +41,8 @@ The code consists of the following files:
    synonym_file_parsers.py
    word_list_generator.py
 
-The file runme is contains the main() function and is the one the user should run as:
+The file runme is contains the main() function and is the one the user
+should run as:
 $ python3 runme.py file1.txt file2.txt N syn_list.txt
 or
 $ python3 runme.py file1.txt file2.txt
@@ -75,7 +78,7 @@ can do O(1) time lookup when we are given a word to see if it has a
 synonym or not.
 
 Furhtermore, the N-tuples generated from the text input files are also
-stored in a Hash Table so we can do O(1) time lookups. We need this so
+stored in a Hash Table so we can do O(1) time lookup. We need this so
 can efficiently check if one file contains a tuple that is also there
 in another file another file.
 
@@ -89,7 +92,7 @@ readable code like use the"in" keyword to check if a tuple is in the
 custom data structure. For example:
 
 > for n_tuple in file1_tuples_container: # readable looping
->     if n_tuple in file2_tuples_contianer: # I can use "in" keyword 
+>     if n_tuple in file2_tuples_contianer: # I can use "in" keyword; it is in O(1) as well as I used a hastable
 >         similar_tuple_count += 1
 
 I chose to do this so if another engineer were to continue working on
@@ -101,6 +104,9 @@ variable and function names.
 Furthermore, I chose to write a generator class which accepts the
 synonyms list as input into its constructor so we can use the same
 class to generate the word lists for multiple files.
+
+I have also handled exceptions in the code and made custom exceptions
+and used them where appropriate.
 
 > If there are obvious ways it could be abstracted or extended, is it
   designed to support that? 
@@ -118,3 +124,4 @@ the parser and rest of the code will work as expected.
 Furthermore, the words in the input file are split on a regular
 expression, which can be modified by passing an additional parameter
 and the code will work for an alternate definition of word.
+
