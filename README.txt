@@ -35,7 +35,7 @@ Code structure
 ==============
 The code consists of the following files:
    runme.py
-   plagarism_detector.py
+   plagiarism_detector.py
    synonym_file_parsers.py
    word_list_generator.py
 
@@ -71,7 +71,7 @@ I chose to store the synonym list in a hash table data structure so we
 can do O(1) time lookup when we are given a word to see if it has a
 synonym or not.
 
-Furhtermore, the N-tuples generated from the text input files are also
+Furthermore, the N-tuples generated from the text input files are also
 stored in a Hash Table so we can do O(1) time lookup. We need this so
 can efficiently check if one file contains a tuple that is also there
 in another file another file.
@@ -86,7 +86,7 @@ readable code like use the"in" keyword to check if a tuple is in the
 custom data structure. For example:
 
 > for n_tuple in file1_tuples_container: # readable looping
->     if n_tuple in file2_tuples_contianer: # I can use "in" keyword; it is in O(1) as well as I used a hastable
+>     if n_tuple in file2_tuples_container: # I can use "in" keyword; it is in O(1) as well as I used a hash table
 >         similar_tuple_count += 1
 
 I chose to do this so if another engineer were to continue working on

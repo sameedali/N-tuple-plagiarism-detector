@@ -1,16 +1,16 @@
 """
-This module defines a plagarism detector in Python.
+This module defines a plagiarism detector in Python.
 """
 
 
 class PlagiarismDetector(object):
     """
-    A class which defines the plagarism detector
+    A class which defines the plagiarism detector
     """
 
     def __init__(self, N=3):
         """
-        Initializes the plagarism detector.
+        Initializes the plagiarism detector.
 
         @param N the size of N-tuple. default value = 3
         """
@@ -21,8 +21,8 @@ class PlagiarismDetector(object):
         Returns the similiarity score (see get_similiarity_score) as a
         percentage string.
 
-        @param file1_words word list from file1 with synonms replaced
-        @param file2_words word list from file2 with synonms replaced
+        @param file1_words word list from file1 with synonyms replaced
+        @param file2_words word list from file2 with synonyms replaced
         @returns the similiarity score percentage as a string.
         """
         similiarity_score = self.get_similiarity_score(file1_words,
@@ -35,8 +35,8 @@ class PlagiarismDetector(object):
         calculating the number of common tuples divided by the total
         tuples in file1.
 
-        @param file1_words word list from file1 with synonms replaced
-        @param file2_words word list from file2 with synonms replaced
+        @param file1_words word list from file1 with synonyms replaced
+        @param file2_words word list from file2 with synonyms replaced
         @returns number of common N-tuples/number of tuples in
         file1_words
         """
@@ -60,13 +60,13 @@ class NTupleContainer(object):
     """
     A custom ADT which holds the N-tuples found in a word list.
 
-    This is used by the PlagarismDetector class to efficiently
-    calculate the similiarity score
+    This is used by the PlagiarismDetector class to efficiently
+    calculate the similarity score
     """
 
     def __init__(self, word_list, N):
         """
-        initializes the continer by generating all N-sized tuples from
+        initializes the container by generating all N-sized tuples from
         the word_list.
         """
         self.tuple_dict = {}
@@ -109,7 +109,7 @@ class NTupleContainer(object):
     def __iter__(self):
         """
         Allows the container to be iterable in python.
-        @returns an interator over the tuples in the container
+        @returns an iterator over the tuples in the container
         """
         return iter(self.tuple_dict.keys())
 

@@ -1,13 +1,13 @@
 """
 This module defines a WordListGenerator class which generates
-wordlists from an input text file for plagarism detection.
+wordlists from an input text file for plagiarism detection.
 """
 import re
 
 
 class WordListGenerator(object):
     """
-    A class which handles the word list generation for the plagarism detection
+    A class which handles the word list generation for the plagiarism detection
     """
 
     def __init__(self, synonyms_dict, word_regex=r"[a-zA-z]+"):
@@ -42,19 +42,19 @@ class WordListGenerator(object):
     def replace_synonyms(self, words):
         """
         Given a list of words, replace the synonyms wih the first
-        synonym in the correspoinding line of synonym file.
+        synonym in the corresponding line of synonym file.
 
         Example if words are:
         ["hello", "run", "world"]
 
-        the output woud be:
+        the output would be:
         ["hello", "walk", world]
 
         where "walk run stroll" is the corresponding synonyms line in
         the synonyms file.
 
         @param words a list of strings
-        @return a list of string with synonms replaced as defined in
+        @return a list of string with synonyms replaced as defined in
         the synonym_dict dictionary
         """
         return [self.synonym_dict[word] if word in self.synonym_dict else word
@@ -63,11 +63,11 @@ class WordListGenerator(object):
     def generate_list(self, raw_input_string):
         """
         Generates a word list from a given input string, and
-        replaces all synonyms in thw word list with those in the synonym
+        replaces all synonyms in the word list with those in the synonym
         dictionary.
 
         @param raw_input_string the string read from the input file
-        @returns a list of words with synonms replaced
+        @returns a list of words with synonyms replaced
         """
 
         words = self.convert_to_words(raw_input_string)
